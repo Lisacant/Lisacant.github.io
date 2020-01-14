@@ -1,0 +1,77 @@
+.composition {
+    position: relative;
+    /* beacause the photo element needs a reference */
+
+    &__photo {
+        width: 55%;
+        /* always define the width of images in % for responsive web design */
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+        border-radius: 2px;
+        position: absolute;
+        z-index: 10;
+        /* lower z-index than hover so that is stays on background when hovering */
+        transition: all .2s;
+        outline-offset: 2rem;
+        /* gives space between border */
+
+@include respond(tab-port) {
+    float: left;
+    position: relative;
+    width: 33.3333%;
+    box-shadow: 0 1.5rem 3rem rgba($color-black, .2);
+}
+
+        &--p1 {
+            left: 0;
+            top: -2rem;
+            /* this will move the picture up, negative because Y axe goes up */
+
+            @include respond(tab-port) {
+              top: 0;
+              transform: scale(1.2);
+            }
+        }
+
+        &--p2 {
+            right: 0;
+            /* it will start at the right side */
+            top: 2rem;
+            /* this will move the picture 2rem to the right */
+
+            @include respond(tab-port) {
+                top: -1rem;
+                transform: scale(1.3);
+                z-index: 100;
+              }
+        }
+
+        &--p3 {
+            left: 12rem;
+            /* moves picture to the right because X is positive */
+            top: 10rem;
+            /* this will move the picture to the bottom, because Y is positive */
+
+            @include respond(tab-port) {
+                top: 1rem;
+                left: 0;
+                transform: scale(1.1);
+              }
+        }
+
+        &:hover {
+            outline: 1.5rem solid $color-primary;
+            /* gives a border */
+            transform: scale(1.05) translateY(-.1rem);
+            /* make the picture bigger */
+            box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
+            z-index: 20;
+            /* Z-index is higher than original so will be placed on top */
+        }
+
+    }
+
+    /* the full compasition hovering */
+    &:hover &__photo:not(:hover) {
+        transform: scale(.95);
+    }
+}
